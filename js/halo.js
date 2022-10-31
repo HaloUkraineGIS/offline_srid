@@ -39,20 +39,20 @@ var FromProjection	= ''
 
 function selectUTM35() {
 	FromProjection	= '+proj=utm +zone=35 +datum=WGS84 +units=m +no_defs';
-	let pSrid = document.getElementById('psrid')
+	let pSrid = document.getElementById('srid')
 	pSrid.innerText = 'UTM zone 35N'
 
 	console.log(FromProjection)
 }
 function selectUTM36() {
 	FromProjection	= '+proj=utm +zone=36 +datum=WGS84 +units=m +no_defs';
-	let pSrid = document.getElementById('psrid')
+	let pSrid = document.getElementById('srid')
 	pSrid.innerText = 'UTM zone 36N'
 	console.log(FromProjection)
 }
 function selectUTM37() {
 	FromProjection	= '+proj=utm +zone=37 +datum=WGS84 +units=m +no_defs';
-	let pSrid = document.getElementById('psrid')
+	let pSrid = document.getElementById('srid')
 	pSrid.innerText = 'UTM zone 37N'
 	console.log(FromProjection)
 }
