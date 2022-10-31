@@ -1,0 +1,372 @@
+.wraper {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+}
+
+#map {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 474px;
+}
+
+#psrid {
+	padding: 4px auto;
+	color: rgb(0, 60, 255);
+	font-size: 15px;
+	
+}
+
+.right {
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+	width: 471px;
+ 	overflow: auto;
+/*  font-size: 12px;*/
+ 	padding-left: 3px;
+}
+
+#PointsTable input[type="checkbox"] {
+  margin: 0;
+}
+
+#PointsTable input[type="text"],
+#PointsTable input[type="number"]
+{
+  display: block; 
+  padding: 0; 
+  margin: 0; 
+  border: 0; 
+  border: 2px solid #fff;
+  width: 68px;
+  height: 21px;
+}
+
+#PointsTable input:disabled[type="text"],
+#PointsTable input:disabled[type="number"]
+{
+  background-color: #ddd;
+  border: 2px solid #ddd;
+}
+
+#PointsTable input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+#PointsTable input::-webkit-outer-spin-button,
+#PointsTable input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+#PointsTable 
+{
+	margin:0px 0 10px 0;
+  	padding:0px;
+	width:100%;
+}
+
+#PointsTable table
+{
+  	border-collapse: collapse;
+  	border-spacing: 0;
+	border:1px solid #7f7f7f;
+	height:100%;
+	margin:0px;
+  	padding:0px;
+  	width: 447px;
+  	border-radius: 3px;
+}
+
+/*#PointsTable tr:nth-child(odd){ background-color:#e5e5e5; }
+
+#PointsTable tr:nth-child(even){ background-color:#ffffff; }*/
+
+#PointsTable td{
+	vertical-align:middle;
+	border:1px solid #7f7f7f;
+	border-width:0px 1px 1px 0px;
+	text-align:left;
+	padding:0px;
+  	margin: 0;
+	color:#000000;
+}
+
+#PointsTable tr:last-child td{
+	border-width:0px 1px 0px 0px;
+}
+
+#PointsTable tr td:last-child{
+	border-width:0px 0px 1px 0px;
+}
+
+#PointsTable tr:last-child td:last-child{
+	border-width:0px 0px 0px 0px;
+}
+#PointsTable tr:first-child th{
+	/*background:-o-linear-gradient(bottom, #cccccc 5%, #b2b2b2 100%);
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #cccccc), color-stop(1, #b2b2b2) );
+	background:-moz-linear-gradient( center top, #cccccc 5%, #b2b2b2 100% );
+	background: -o-linear-gradient(top,#cccccc,b2b2b2);*/
+	background-image: linear-gradient(to bottom, #cccccc, #b2b2b2);
+	background-color:#cccccc;
+	border:0px solid #7f7f7f;
+	text-align:center;
+	border-width:0px 0px 1px 1px;
+	color:#000000;
+}
+
+#PointsTable tr:first-child th:first-child{
+	border-width:0px 0px 1px 0px;
+}
+#PointsTable tr:first-child th:last-child{
+	border-width:0px 0px 1px 1px;
+}
+
+#PointsTable .col1 {
+  padding: 0 2px 0 2px;
+  width: 36px;
+}
+
+#PointsTable .col2, .col3, .col4, .col6, .col7 {
+  width: 69px;
+  height: 22px;
+}
+
+#PointsTable .col5 {
+	width: 30px;
+	text-align:center;
+}
+
+/*#PointsTable .data_row .col2,
+#PointsTable .data_row .col3,
+#PointsTable .data_row .col4 {
+	top: 10px;
+	position: relative;
+	border: 1px solid #7f7f7f;
+}*/
+
+#PointsTable .footer_row td {
+  padding: 0 2px;
+}
+
+#PointsTable td .ErrorInput
+{
+	border-color: rgba(255, 0, 0, 0.5);
+}
+
+.col5 input {
+	vertical-align: middle;
+
+}
+
+/** #ParamTable **/
+
+#ParamTable td {
+	padding: 3px;
+}
+
+#ParamTable {
+	width: 411px;
+    margin-bottom: 10px;
+}
+
+#ParamTable tr td:first-child {
+	width: 100px;
+
+}
+
+#ParamTable select
+{
+	min-width: 150px;
+	border-radius: 3px;
+}
+
+#ParamTable input[type="number"]
+{
+	width: 50px;
+	border-radius: 3px;
+    border-width: 1px;
+    border-color: darkgrey;
+}
+
+#srid {
+	width: 100%;
+	border-radius: 3px;
+    border-width: 1px;
+    border-color: darkgrey;
+}
+
+#fPolygon button {
+	border-radius: 14px;
+	padding: 3px 12px 3px 12px;
+
+	text-decoration: none;
+	margin: 0 6px 0 0;
+	display: inline-block;
+	border-width: 0;
+	vertical-align: top;
+}
+
+#fPolygon button:enabled {
+	background: #b6c6d6;
+	color: #ffffff;
+	background-image: linear-gradient(to bottom, #b6c6d6, #424a4f);
+}
+
+
+
+#fPolygon button:disabled {
+	background: #444444;
+	color: #aaaaaa;
+	background-image: linear-gradient(to bottom, #ddd, #999);
+}
+
+
+#fPolygon button:hover:enabled {
+	background: #424a4f;
+	text-decoration: none;
+	background-image: linear-gradient(to bottom, #424a4f, #b6c6d6);
+}
+
+#error 
+{
+	border: 2px solid #f00;
+	border-radius: 4px;
+	color: #f00;
+	width: 411px;
+	padding: 3px 5px;
+	margin-bottom: 3px;
+	font-weight: bold;
+}
+
+/*ul.dropdown 
+{
+	margin: 0;
+}
+
+ul.dropdown li { position: relative; }
+
+ul.dropdown, ul.dropdown-inside 
+{
+	list-style-type: none;
+	padding: 0;
+}
+
+ul.dropdown-inside 
+{
+	position: absolute;
+	height: 0;
+	left: -2px;
+	overflow: hidden;
+	width: 80px;
+	margin-top: 0px;
+	
+	border-radius: 4px;
+}
+
+ul.dropdown li.dropdown-top 
+{
+	display: inline;
+	float: left;
+	margin: 0 1px 0 0;
+}
+
+#export:hover:enabled ul.dropdown li.dropdown-top .dropdown-inside,
+ul.dropdown:hover li.dropdown-top .dropdown-inside 
+{
+	display: block;
+	border: 1px solid #ddd;
+	height: 70px;
+	transition: height 0.3s ease-out 0.1s;
+}
+
+ul.dropdown .dropdown-inside { background: #fff; }
+ul.dropdown .dropdown-inside a:hover { background: #dfdfdf; }
+
+a { color: darkblue; }
+a:hover { color: darkred; }
+.clear { clear: both; }
+
+ul.dropdown li { position: relative; }
+ul.dropdown,
+ul.dropdown-inside {
+	list-style-type: none;
+	padding: 0;
+}
+ul.dropdown-inside { 
+	position: absolute;
+	left: -9999px;
+}
+ul.dropdown li.dropdown-top {
+	display: inline;
+	float: left;
+	margin: 0 1px 0 0; 
+}
+ul.dropdown li.dropdown-top a {
+	padding: 3px 10px 4px;
+	display: block;
+}
+ul.dropdown a.dropdown-top { background: #efefef; }
+ul.dropdown a.dropdown-top:hover { padding: 2px 10px 5px; }
+ul.dropdown li.dropdown-top:hover .dropdown-inside {
+	display: block;
+	left: 0;
+}
+ul.dropdown .dropdown-inside { background: #fff; }
+ul.dropdown .dropdown-inside a:hover { background: #efefef;	 }*/
+
+
+ul.dropdown 
+{
+	margin: 0;
+	display: inline-block;
+}
+
+ul.dropdown li { position: relative; }
+
+ul.dropdown, ul.dropdown-inside 
+{
+	list-style-type: none;
+	padding: 0;
+}
+
+ul.dropdown-inside 
+{
+	position: absolute;
+	height: 0;
+	left: 5px;
+	overflow: hidden;
+	width: 80px;
+	margin-top: 0px;
+	text-align: center;
+	border-radius: 4px;
+}
+
+ul.dropdown li.dropdown-top 
+{
+	display: inline;
+	float: left;
+	margin: 0 1px 0 0;
+}
+
+ul.dropdown li.dropdown-top:hover .dropdown-inside
+{
+	display: block;
+	border: 1px solid #ddd;
+	height: 70px;
+	transition: height 0.3s ease-out 0.1s;
+}
+
+ul.dropdown .dropdown-inside { background: #fff; }
+ul.dropdown .dropdown-inside a:hover { background: #dfdfdf; }
+
+.SetPoint
+{
+	background : green;
+}

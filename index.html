@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Offline polygon entering form</title>
+    <meta name="description" content="Offline poligon entering form" />
+    <meta name="author" content="BlackTopol" />
+
+    <link rel="stylesheet" href="css/main_default-compact.css" />
+    <link rel="stylesheet" href="css/style.css?v=1.0" />
+    <link rel="stylesheet" href="css/leaflet.label.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+      integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+      crossorigin=""
+    />
+
+    <script
+      src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+      integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+      crossorigin=""
+    ></script>
+
+    <script src="http://cdn.jsdelivr.net/leaflet.esri/2.0.0-beta.7/esri-leaflet.js"></script>
+
+    <script src="js/proj4/proj4-compressed.js"></script>
+    <script src="js/proj4/proj4leaflet.js"></script>
+
+    <script src="js/turf.min.js"></script>
+
+    <link rel="stylesheet" href="css/jquery-ui.min.css" />
+    <script src="js/jquery-1.12.3.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/halo.js"></script>
+
+    <script src="js/FileSaver.min.js"></script>
+    <script src="js/tokml.js"></script>
+
+    <script src="js/leaflet.label.js"></script>
+
+    <script type="text/javascript" src="js/shpwrite.js"></script>
+    <script type="text/javascript" src="js/require.js"></script>
+    <script src="js/jszip.min.js"></script>
+
+    <script src="js/intersects.js"></script>
+  </head>
+
+  <body>
+    <div class="wraper">
+      <div id="map"></div>
+      <div class="right">
+        <form id="fPolygon" name="fPolygon" action="Save.php" method="POST">
+          <table id="ParamTable">
+            <tbody>
+              <tr class="offLineMode" style="display: table-row">
+                <td>Task ID;</td>
+                <td>
+                  <input
+                    type="text"
+                    id="TaskIDText"
+                    placeholder="Enter TaskID for offline mode"
+                  />
+                </td>
+              </tr>
+
+              <tr>
+                <td>Polygon ID</td>
+                <td>
+                  <select
+                    id="PolygonID"
+                    name="PolygonID"
+                    onChange="ChangePolygonID(this.value); return false;"
+                  >
+                    <option value="0">New Polygon</option>
+                  </select>
+                </td>
+              </tr>
+
+              <tr class="offLineMode" style="display: table-row">
+                <td>Polygon Type</td>
+                <td>
+                  <input
+                    type="text"
+                    id="PolygonTypeText"
+                    placeholder="Enter polygon type for offline mode"
+                  />
+                </td>
+              </tr>
+
+              <tr>
+                <td>SRID</td>
+                <td>
+                  <!--<input id = "srid" class = "ErrorInput" value = "WGS 84 / UTM zone 37N EPSG 32637" readonly>-->
+                  <!--<select name="zoneUtm" id="srida" class="zoneUtm">
+                    <option
+                      class="ErrorInput"
+                      value="+proj=utm +zone=35 +datum=WGS84 +units=m +no_defs"
+                    >
+                      UTM zone 35N
+                    </option>
+                    <option
+                      class="ErrorInput"
+                      value="+proj=utm +zone=36 +datum=WGS84 +units=m +no_defs"
+                      selected="selected"
+                    >
+                      UTM zone 36N
+                    </option>
+                    <option
+                      class="ErrorInput"
+                      value="+proj=utm +zone=37 +datum=WGS84 +units=m +no_defs"
+                    >
+                      UTM zone 37N
+                    </option>
+                  </select>-->
+                  <button class='button' id="btnsrid35" onClick="selectUTM35()">UTM35 </button>
+				  <button class='button' id="btnsrid36" onClick="selectUTM36()">UTM36 </button>
+				  <button class='button' id="btnsrid37" onClick="selectUTM37()">UTM37 </button>
+				  <p id="psrid"></p>
+
+                  <input type="hidden" id="fsrid" name="fsrid" value="3121" />
+                  <input type="hidden" id="farea" name="farea" />
+                </td>
+              </tr>
+              <tr>
+                <td>Magnetic<br />declination</td>
+                <td>
+                  <input
+                    type="number"
+                    id="md"
+                    name="md"
+                    value="7"
+                    min="-360"
+                    max="360"
+                    onchange="RecalculateMagnetic(); Calculate(); return false;"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>TP count</td>
+                <td>
+                  <input type="number" value="3" id="tpcount" name="tpcount" />
+                  <button onClick="GenerateTable(false); return false;">
+                    Change
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="error"></div>
+          <div id="PointsTable"></div>
+
+          <button
+            onClick="Save(); return false;"
+            id="bSave"
+            disabled
+            style="display: none"
+          >
+            Save
+          </button>
+          <button onClick="Calculate(); return false;">Calculate</button>
+          <button onClick="RB(); return false;">Reset</button>
+
+          <ul class="dropdown">
+            <li class="dropdown-top">
+              <button id="export" class="dropdown-top" disabled>
+                Export To &#9660;
+              </button>
+              <ul class="dropdown-inside">
+                <li>
+                  <a href="/" onClick="ExportTo('kml'); return false;">KML</a>
+                </li>
+                <li>
+                  <a href="/" onClick="ExportTo('shp'); return false;">SHP</a>
+                </li>
+                <li>
+                  <a href="/" onClick="ExportTo('csv'); return false;">CSV</a>
+                </li>
+                <li>
+                  <a href="/" onClick="ExportTo('json'); return false;">JSON</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <script src="js/LoadFromFile.js"></script>
+          <script src="js/togeojson.js"></script>
+          <div id="fileLoad">
+            <input
+              type="file"
+              id="files"
+              name="files[]"
+              accept=".json, .geojson, .csv, .kml"
+            />
+            <!-- multiple />-->
+            <output id="list"></output>
+          </div>
+
+          <!-- 				<br>
+				<button onClick = "ExportTo('kml'); return false;">Export To KML</button>
+				<button onClick = "ExportTo('shp'); return false;">Export To SHP</button>
+				<button onClick = "ExportTo('csv'); return false;">Export To CSV</button>
+				<button onClick = "ExportTo('json'); return false;">Export To JSON</button> -->
+        </form>
+      </div>
+    </div>
+
+    <script>
+      $("form").submit(function () {
+        return false; //Отменили нативное действие
+      });
+
+      var map = L.map("map").setView([50.440698, 30.507957], 8);
+      /*
+		L.esri.basemapLayer("Topographic").addTo(map);
+		/**/
+      var publicOrto = L.tileLayer(
+        "http://212.26.144.110/tile2/orto_10000/{z}/{x}/{y}.jpg",
+        {
+          tms: true,
+          maxZoom: 18,
+        }
+      );
+
+      var osm = L.tileLayer(
+        "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+          attribution:
+            '&copy; <a href="http://openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors',
+        }
+      ).addTo(map);
+
+      
+
+      var googleStreets = L.tileLayer(
+        "http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+        {
+          subdomains: ["mt0", "mt1", "mt2", "mt3"],
+          attribution:
+            '&copy; <a href="https://www.google.com/permissions/geoguidelines.html" target="_blank">Google</a> contributors',
+        }
+      );
+	  var googleSatellite = L.tileLayer(
+        "http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+        {
+          subdomains: ["mt0", "mt1", "mt2", "mt3"],
+          attribution:
+            '&copy; <a href="https://www.google.com/permissions/geoguidelines.html" target="_blank">Google</a> contributors',
+        }
+      );
+
+      /*
+		var esri = L.esri.featureLayer({
+			url: 'http://services6.arcgis.com/VIGqyadTYK51m563/arcgis/rest/services/railroad/FeatureServer/0'
+		}).addTo(map);
+		/**/
+
+      var baseLayers = {
+        "Публічна кадастрова карта": publicOrto,
+        OpenStreetMap: osm,
+        "Google Satellite": googleSatellite,
+        "Google Street": googleStreets,
+      };
+
+      /*
+		var overlays = {
+			"ESRI": esri
+		};
+		/**/
+
+      L.control.layers(baseLayers /*, overlays/**/).addTo(map);
+      /**/
+
+      L.control.scale({ imperial: false }).addTo(map);
+
+      map.on("click", onMapClick);
+    </script>
+  </body>
+</html>
